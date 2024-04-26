@@ -1,0 +1,53 @@
+MVC
+
+1. Model
+2. View
+3. Controller
+https://www.geeksforgeeks.org/mvc-framework-introduction/
+
+
+<?php
+ $dsn = "mysql:host=localhost; dbname=myfirstdatabase"; //data source name: what kid of datbase driver? what host? database name?
+ //default values: of username & password
+ $dbusername = "root";
+ $dbpassword = "";
+ 
+try
+{
+/*
+3 ways to connect database :
+1) mysql: very bad.....security things not good
+they came up with this
+2) mysqli: it is a little better.....to connect to mysql databases.
+3) pdo: php data objects.............another way to connect to a database.
+is a way for us to create a database object when we want to connect to a database.
+*/
+
+$pdo = new PDO($dsn, $dbusername, $dbpassword);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch(PDOexception $e)
+{
+echo "Connection Faileed: " . $e->getMessage();
+}
+/*
+Error Handling: It's good to handle exceptions when creating a PDO connection. However, you should avoid directly displaying error messages to the user, especially in a production environment. Use error_log() or other logging mechanisms instead of echo to log errors.
+<?php
+$dsn = "mysql:host=localhost;dbname=myfirstdatabase"; // Data source name: specifies the database driver, host, and database name
+$dbusername = "root";
+$dbpassword = "";
+
+try {
+    // Create a new PDO instance
+    $pdo = new PDO($dsn, $dbusername, $dbpassword);
+    
+    // Set PDO error mode to exception
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    // Log the error for troubleshooting and provide a generic error message to the user
+    error_log("Connection failed: " . $e->getMessage());
+    die("Database connection failed. Please try again later.");
+}
+?>
+
+*/
